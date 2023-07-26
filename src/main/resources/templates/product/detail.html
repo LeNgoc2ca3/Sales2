@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+<main>
+<div class="card">
+    <img th:src="@{'/assets/images/' + *{item.image}}" class="card-img-top"
+         style="height: 300px;width: 100%;">
+</div>
+<h1 class="card-title">Tên sản phẩm: [(${item.name})]</h1>
+<h1 class="card-subtitle mb-2 text-muted">Ngày tạo: [(${item.createDate})]</h1>
+<h1 class="card-subtitle mb-2 text-muted">Thể loại: [(${item.category.name})]</h1>
+<h1 class="card-subtitle-2 text-muted">Tình trạng: [(${item.available == false ? 'Hết hàng' : 'Còn hàng'})]</h1>
+<h3>Cùng loại với:</h3>
+<ul class="list-group">
+    <li th:each="p:${item.category.products}" class="list-group-item">
+        <a th:href="@{|/product/detail/${p.id}|}">[(${p.name})]</a>
+    </li>
+</ul>
+</main>
+</body>
+
+</html>
